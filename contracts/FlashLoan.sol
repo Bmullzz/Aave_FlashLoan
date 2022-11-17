@@ -16,7 +16,17 @@ contract FlashLoan is FlashLoanSimpleReceiverBase {
     {}
 
     function createFlashLoan(address asset, uint amount) external {
+        address receiver = address(this);
+        bytes memory params = ""; //use this to pass arbitrary data to executeOperations
+        uint16 referralCode = 0;
 
+        POOL.flashLoanSample(
+            receiver,
+            asset,
+            amount,
+            params,
+            referralCode
+        );
     }
 
     function executeOperation(
@@ -24,7 +34,14 @@ contract FlashLoan is FlashLoanSimpleReceiverBase {
         uint256 amount, 
         uint256 premium, 
         address initiator, 
-        bytes calldata params) {
+        bytes calldata params
+    ) external returns (bool){
+        // do things like arbitrage here
+        // abi.decode(params) to decode params
 
+        uint amountOwing = amount.add(premium);
+        IERC20(assets).approve(address(POOL), amountOwing);
+        emit Log(asset, amountOwing);
+        return true;
     }
 }

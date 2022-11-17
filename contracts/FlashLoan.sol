@@ -41,7 +41,7 @@ contract FlashLoan is FlashLoanSimpleReceiverBase {
         // abi.decode(params) to decode params
 
         uint amountOwing = amount.add(premium);
-        IERC20(assets).approve(address(POOL), amountOwing);
+        IERC20(asset).approve(address(POOL), amountOwing);
         emit Log(asset, amountOwing);
         return true;
     }

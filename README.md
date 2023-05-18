@@ -18,5 +18,5 @@
     - `executeOperation()` is all custom code that you have written. At the end, you grant approval to the Flash Loan Provider to withdraw the borrowed assets from the contract plus a premium.
     - The Flash Loan provider then takes back the assets it gave you, plus the premium for lending you the assets.
 
-    
+## Anatomy of the Smart contract    
 
